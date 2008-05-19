@@ -99,6 +99,7 @@ install -m 755 %{SOURCE3} %{buildroot}%{_bindir}
 install -dm 755 %{buildroot}%{_datadir}/pixmaps
 install -m 644 %{SOURCE4} %{buildroot}%{_datadir}/pixmaps
 
+mkdir -p %{buildroot}%{_datadir}/applications
 cat > %{buildroot}%{_datadir}/applications/%{name}.desktop << EOF
 [Desktop Entry]
 Encoding=UTF-8
