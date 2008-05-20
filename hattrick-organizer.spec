@@ -17,7 +17,7 @@ BuildRequires:	ant
 BuildRequires:	dos2unix
 BuildRequires:	hsqldb
 BuildRequires:	java-rpmbuild
-BuildRequires:	jlayer
+BuildRequires:	jlayer >= 1.0-2
 BuildRequires:	jpackage-utils
 BuildRequires:	unzip
 BuildRequires:	update-alternatives
