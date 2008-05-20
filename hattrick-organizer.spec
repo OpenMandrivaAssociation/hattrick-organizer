@@ -35,7 +35,7 @@ manager hattrick (www.hattrick.org).
 %package javadoc
 Summary:	Javadoc for Hattrick Organizer
 Group:		Development/Java
-PreReq:		coreutils
+Requires(pre):	coreutils
 
 %description javadoc
 Javadoc for Hattrick Organizer.
