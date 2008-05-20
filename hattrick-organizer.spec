@@ -6,7 +6,7 @@ Version:	1.400
 Release:	%mkrel 1
 License:	LGPLv2+
 URL:		http://www.hattrickorganizer.net/
-Group:		Games/Sport
+Group:		Games/Sports
 # https://ho1.svn.sourceforge.net/svnroot/ho1 HO_%realver-src
 Source0:	HO_%{realver}-src.tar.bz2
 Source1:	http://downloads.sourceforge.net/ho1/HO_%{realver}.zip
