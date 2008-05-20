@@ -24,6 +24,7 @@ BuildRequires:	update-alternatives
 BuildRequires:	xml-commons-apis
 Requires:	hsqldb
 Requires:	java >= 1.5
+Requires:	jpackage-utils
 Requires:	jlayer
 BuildArch:	noarch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
