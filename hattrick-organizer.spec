@@ -3,7 +3,7 @@
 Summary:	Helper Tool for online football manager
 Name:		hattrick-organizer
 Version:	1.400
-Release:	%mkrel 2
+Release:	%mkrel 3
 License:	LGPLv2+
 URL:		http://www.hattrickorganizer.net/
 Group:		Games/Sports
@@ -59,7 +59,7 @@ rm HOLauncher.class
 rm hsqldb_lic.txt
 rm README_JL.txt
 
-dos2unix     *.txt
+dos2unix *.txt
 chmod 644 *.txt
 
 find hoplugins -type f -exec chmod 644 {} \;
@@ -68,6 +68,7 @@ find hoplugins -type f -exec chmod 644 {} \;
 %ant jar javadocs
 
 %install
+
 # jars
 install -dm 755 %{buildroot}%{_javadir}
 install -pm 644 %{name}.jar %{buildroot}%{_javadir}/%{name}-%{version}.jar
@@ -90,6 +91,8 @@ install -dm 755 %{buildroot}%{_datadir}/%{name}/hoplugins
 cp -a hoplugins/* %{buildroot}%{_datadir}/%{name}/hoplugins
 install -dm 755 %{buildroot}%{_datadir}/%{name}/sprache
 install -m 644 sprache/*.properties %{buildroot}%{_datadir}/%{name}/sprache
+install -dm 755 %{buildroot}%{_datadir}/%{name}/prediction
+cp -r  conf/prediction/* %{buildroot}%{_datadir}/%{name}/prediction
 
 # startscript
 # the original HO.sh was modified to use jpackage features and already packed jars
@@ -140,6 +143,8 @@ rm -rf %{buildroot}
 %{_datadir}/%{name}/hoplugins/*
 %dir %{_datadir}/%{name}/sprache
 %{_datadir}/%{name}/sprache/*
+%dir %{_datadir}/%{name}/prediction
+%{_datadir}/%{name}/prediction/*
 %{_datadir}/pixmaps/*.png
 %{_datadir}/applications/*.desktop
 
