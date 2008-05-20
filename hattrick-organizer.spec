@@ -3,7 +3,7 @@
 Summary:	Helper Tool for online football manager
 Name:		hattrick-organizer
 Version:	1.400
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	LGPLv2+
 URL:		http://www.hattrickorganizer.net/
 Group:		Games/Sports
