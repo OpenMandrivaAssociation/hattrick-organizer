@@ -1,9 +1,9 @@
-%define realver 1400
+%define realver 1410
 
 Summary:	Helper Tool for online football manager
 Name:		hattrick-organizer
-Version:	1.400
-Release:	%mkrel 5
+Version:	1.410
+Release:	%mkrel 1
 License:	LGPLv2+
 URL:		http://www.hattrickorganizer.net/
 Group:		Games/Sports
@@ -51,18 +51,21 @@ unzip -q -o %{SOURCE1}
 install -m 644 %{SOURCE2} .
 
 # clean up
-rm *.bat
-rm ho.jar
-rm hsqldb.jar
-rm jl*.jar
-rm HOLauncher.class
-rm hsqldb_lic.txt
-rm README_JL.txt
+rm -rf *.bat
+rm -rf ho.jar
+rm -rf hsqldb.jar
+rm -rf jl*.jar
+rm -rf HOLauncher.class
+rm -rf hsqldb_lic.txt
+rm -rf README_JL.txt
 
 dos2unix *.txt
 chmod 644 *.txt
 
 find hoplugins -type f -exec chmod 644 {} \;
+
+install -dm 755 lib
+%jar cf lib/hoplugins.jar hoplugins
 
 %build
 %ant jar javadocs
@@ -89,10 +92,10 @@ install -dm 755 %{buildroot}%{_datadir}/%{name}/flags
 install -m 644 flags/*.png %{buildroot}%{_datadir}/%{name}/flags
 install -dm 755 %{buildroot}%{_datadir}/%{name}/hoplugins
 cp -a hoplugins/* %{buildroot}%{_datadir}/%{name}/hoplugins
+install -dm 755 %{buildroot}%{_datadir}/%{name}/prediction
+cp -a prediction/* %{buildroot}%{_datadir}/%{name}/prediction
 install -dm 755 %{buildroot}%{_datadir}/%{name}/sprache
 install -m 644 sprache/*.properties %{buildroot}%{_datadir}/%{name}/sprache
-install -dm 755 %{buildroot}%{_datadir}/%{name}/prediction
-cp -r  conf/prediction/* %{buildroot}%{_datadir}/%{name}/prediction
 
 # startscript
 # the original HO.sh was modified to use jpackage features and already packed jars
