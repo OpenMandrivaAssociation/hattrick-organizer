@@ -1,13 +1,13 @@
-%define realver 1410
+%define realver 1420
 
 Summary:	Helper Tool for online football manager
 Name:		hattrick-organizer
-Version:	1.410
+Version:	1.420
 Release:	%mkrel 1
 License:	LGPLv2+
 URL:		http://www.hattrickorganizer.net/
 Group:		Games/Sports
-# https://ho1.svn.sourceforge.net/svnroot/ho1 HO_%realver-src
+# svn co https://ho1.svn.sourceforge.net/svnroot/ho1 HO_%{realver}-src
 Source0:	HO_%{realver}-src.tar.bz2
 Source1:	http://downloads.sourceforge.net/ho1/HO_%{realver}.zip
 Source2:	build.xml
