@@ -1,14 +1,16 @@
-%define realver 1421
+%define realver 1422
 
 Summary:	Helper Tool for online football manager
 Name:		hattrick-organizer
-Version:	1.421
+Version:	1.422
 Release:	%mkrel 1
 License:	LGPLv2+
 URL:		http://www.hattrickorganizer.net/
 Group:		Games/Sports
 # svn co https://ho1.svn.sourceforge.net/svnroot/ho1 HO_%{realver}-src
-Source0:	HO_%{realver}-src.tar.bz2
+# tar -cYf HO_%{realver}-src.tar.lzma HO_%{realver}-src/ --exclude-vcs
+#
+Source0:	HO_%{realver}-src.tar.lzma
 Source1:	http://downloads.sourceforge.net/ho1/HO_%{realver}.zip
 Source2:	build.xml
 Source3:	%{name}.sh
@@ -22,6 +24,7 @@ BuildRequires:	jpackage-utils
 BuildRequires:	unzip
 BuildRequires:	update-alternatives
 BuildRequires:	xml-commons-apis
+BuildRequires:	xerces-j2
 Requires:	hsqldb
 Requires:	java >= 1.5
 Requires:	jpackage-utils
