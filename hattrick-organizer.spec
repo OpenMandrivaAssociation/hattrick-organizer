@@ -8,9 +8,9 @@ License:	LGPLv2+
 URL:		http://www.hattrickorganizer.net/
 Group:		Games/Sports
 # svn co https://ho1.svn.sourceforge.net/svnroot/ho1 HO_%{realver}-src
-# tar -cYf HO_%{realver}-src.tar.lzma HO_%{realver}-src/ --exclude-vcs
+# tar -cjf HO_%{realver}-src.tar.lzma HO_%{realver}-src/ --exclude-vcs
 #
-Source0:	HO_%{realver}-src.tar.xz
+Source0:	HO_%{realver}-src.tar.bz2
 Source1:	http://downloads.sourceforge.net/ho1/HO_%{realver}.zip
 Source2:	build.xml
 Source3:	%{name}.sh
