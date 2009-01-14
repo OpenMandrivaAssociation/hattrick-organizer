@@ -1,8 +1,8 @@
-%define realver 1423
+%define realver 1424
 
 Summary:	Helper Tool for online football manager
 Name:		hattrick-organizer
-Version:	1.423
+Version:	1.424
 Release:	%mkrel 1
 License:	LGPLv2+
 URL:		http://www.hattrickorganizer.net/
@@ -25,6 +25,7 @@ BuildRequires:	unzip
 BuildRequires:	update-alternatives
 BuildRequires:	xml-commons-apis
 BuildRequires:	xerces-j2
+BuildRequires:	xmlbeans
 Requires:	hsqldb
 Requires:	java >= 1.5
 Requires:	jpackage-utils
@@ -54,13 +55,13 @@ unzip -q -o %{SOURCE1}
 install -m 644 %{SOURCE2} .
 
 # clean up
-rm -rf *.bat
-rm -rf ho.jar
-rm -rf hsqldb.jar
-rm -rf jl*.jar
-rm -rf HOLauncher.class
-rm -rf hsqldb_lic.txt
-rm -rf README_JL.txt
+rm *.bat
+rm ho.jar
+rm hsqldb.jar
+rm jl*.jar
+rm HOLauncher.class
+rm hsqldb_lic.txt
+rm README_JL.txt
 
 dos2unix *.txt
 chmod 644 *.txt
@@ -70,26 +71,29 @@ find hoplugins -type f -exec chmod 644 {} \;
 install -dm 755 lib
 %jar cf lib/hoplugins.jar hoplugins
 
+mv jcalendar*.jar lib
+
 %build
-%ant jar javadocs
+%ant -Dversion=%{realver} jar javadocs
 
 %install
-
 # jars
-install -dm 755 %{buildroot}%{_javadir}
-install -pm 644 %{name}.jar %{buildroot}%{_javadir}/%{name}-%{version}.jar
-pushd %{buildroot}%{_javadir}
-	for jar in *-%{version}*; do
-		ln -sf ${jar} `echo $jar| sed "s|-%{version}||g"`
-	done
-	# preserve ho.jar cause of possible updates from website ...
-	ln -s %{name}-%{version}.jar ho.jar
+install -dm 755 %{buildroot}%{_javadir}/%{name}
+install -pm 644 %{name}.jar %{buildroot}%{_javadir}/%{name}/%{name}-%{version}.jar
+pushd %{buildroot}%{_javadir}/%{name}
+    for jar in *-%{version}*; do
+	ln -sf ${jar} `echo $jar| sed "s|-%{version}||g"`
+    done
+# preserve ho.jar cause of possible updates from website ...
+    ln -s %{name}-%{version}.jar ho.jar
 popd
+
+install -pm 644 lib/jcalendar*.jar %{buildroot}%{_javadir}/%{name}
 
 # data
 install -dm 755 %{buildroot}%{_datadir}/%{name}
-install -m 644 *.dat %{buildroot}%{_datadir}/%{name}
-install -m 644 defaults.xml %{buildroot}%{_datadir}/%{name}
+#install -m 644 *.dat %{buildroot}%{_datadir}/%{name}
+#install -m 644 defaults.xml %{buildroot}%{_datadir}/%{name}
 install -m 644 version.txt %{buildroot}%{_datadir}/%{name}
 install -dm 755 %{buildroot}%{_datadir}/%{name}/flags
 install -m 644 flags/*.png %{buildroot}%{_datadir}/%{name}/flags
@@ -98,7 +102,7 @@ cp -a hoplugins/* %{buildroot}%{_datadir}/%{name}/hoplugins
 install -dm 755 %{buildroot}%{_datadir}/%{name}/prediction
 cp -a prediction/* %{buildroot}%{_datadir}/%{name}/prediction
 install -dm 755 %{buildroot}%{_datadir}/%{name}/sprache
-install -m 644 sprache/*.properties %{buildroot}%{_datadir}/%{name}/sprache
+install -m 644 sprache/* %{buildroot}%{_datadir}/%{name}/sprache
 
 # startscript
 # the original HO.sh was modified to use jpackage features and already packed jars
@@ -138,11 +142,11 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 %doc *.txt
 %{_bindir}/*.sh
-%{_javadir}/*.jar
+%{_javadir}/%{name}/*.jar
 %dir %{_datadir}/%{name}
-%{_datadir}/%{name}/*.dat
+#%{_datadir}/%{name}/*.dat
 %{_datadir}/%{name}/*.txt
-%{_datadir}/%{name}/*.xml
+#%{_datadir}/%{name}/*.xml
 %dir %{_datadir}/%{name}/flags
 %{_datadir}/%{name}/flags/*
 %dir %{_datadir}/%{name}/hoplugins
