@@ -7,6 +7,8 @@ Release:	%mkrel 1
 License:	LGPLv2+
 URL:		http://www.hattrickorganizer.net/
 Group:		Games/Sports
+# svn co https://ho1.svn.sourceforge.net/svnroot/ho1  HO_%{realver}-src
+# tar -cjf HO_%{realver}-src.tar.lzma HO_%{realver}-src/ --exclude-vcs
 # as upstream provides no extra src.zip, this is svn r666
 Source0:	HO_%{realver}-src.tar.bz2
 Patch0:		%{name}-startscript.patch
@@ -15,9 +17,7 @@ BuildRequires:	ant-nodeps
 BuildRequires:	dos2unix
 BuildRequires:	fdupes
 BuildRequires:	hsqldb
-#BuildRequires:	java-1_7_0-icedtea-devel
 BuildRequires:	java-rpmbuild
-#BuildRequires:	java-1_6_0-sun-devel
 BuildRequires:	jlayer
 BuildRequires:	jpackage-utils
 BuildRequires:	unzip
@@ -32,7 +32,7 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 Hattrick Organizer is a helper tool for online football
-manager (www.hattrick.org),
+manager (www.hattrick.org).
 
 %prep
 %setup -q -n HO1SF
