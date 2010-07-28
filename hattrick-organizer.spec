@@ -1,8 +1,8 @@
-%define realver 1425
+%define realver 1426
 
 Summary:	Helper Tool for online football manager
 Name:		hattrick-organizer
-Version:	1.425
+Version:	1.426
 Release:	%mkrel 1
 License:	LGPLv2+
 URL:		http://www.hattrickorganizer.net/
@@ -35,7 +35,7 @@ Hattrick Organizer is a helper tool for online football
 manager (www.hattrick.org).
 
 %prep
-%setup -q -n HO1SF
+%setup -q -n HO_%{realver}-src
 %patch0 -p0
 
 # clean up already packaged jars
