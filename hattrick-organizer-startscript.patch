@@ -1,0 +1,68 @@
+--- Core/src/conf/addToZip/HO.sh	2009-12-02 19:58:17.000000000 +0100
++++ Core/src/conf/addToZip/hattrick-organizer.sh	2009-12-02 20:22:34.000000000 +0100
+@@ -58,7 +58,7 @@
+ #
+ #HODIR="$(dirname "$0")"
+ 
+-HODIR="$(dirname "$0")"
++HODIR=/usr/share/hattrick-organizer
+ 
+ # Next comes HO!'s directory to store its user data.
+ # This directory must be writable by the user,
+@@ -73,7 +73,8 @@
+ #
+ #HOHOME="~/.hattrickorganizer"
+ 
+-HOHOME="${HODIR}"
++#HOHOME="${HODIR}"
++HOHOME="~/.hattrick-organizer"
+ 
+ # Where can I find java?
+ # Default is just looking at $PATH
+@@ -181,7 +182,7 @@
+ 
+ # required java version
+ 
+-JAVAVERREQ=1.4.1
++JAVAVERREQ=1.5.0
+ 
+ # Which database files and name of backup file?
+ 
+@@ -245,6 +246,9 @@
+ 
+ start(){
+ 	cd "${HOHOME}"
++
++	ln -sf $HODIR/flags . 2> /dev/null
++
+ 	echo "Starting HO from ${HOHOME}..."
+ 
+ 	# Start HOLauncher for update check only in single user mode
+@@ -277,7 +281,26 @@
+ 		HO_PAR="-cp ${JDBC} ${HO_PAR}"
+ 	fi
+ 
+-  	eval "$JAVA -Xmx$MAX_MEMORY ${HO_PAR}"
++	# source the jpackage helpers
++	VERBOSE=1
++	. /usr/share/java-utils/java-functions
++
++	# set JAVA_* environment variables
++	set_javacmd
++	check_java_env
++	set_jvm_dirs
++
++	CLASSPATH=`build-classpath hsqldb jl hattrick-organizer`:$HOHOME:.
++	# run updater
++#	MAIN_CLASS="HOLauncher"
++#	run
++#	$JAVA -classpath $HODIR HOLauncher
++
++	# start main programm
++	MAIN_CLASS="de.hattrickorganizer.HO"
++	set_options "-Xmx$MAX_MEMORY"
++	run
++#  	eval "$JAVA -Xmx$MAX_MEMORY ${HO_PAR}"
+ 
+ 
+ 	if [ _`grep modified "${DATABASEDIR}/database.properties" | \
