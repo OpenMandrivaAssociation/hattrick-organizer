@@ -5,7 +5,7 @@ Name:		hattrick-organizer
 Version:	1.426
 Release:	%mkrel 1
 License:	LGPLv2+
-URL:		http://www.hattrickorganizer.net/
+URL:		https://www.hattrickorganizer.net/
 Group:		Games/Sports
 # svn co https://ho1.svn.sourceforge.net/svnroot/ho1  HO_%{realver}-src
 # tar -cjf HO_%{realver}-src.tar.lzma HO_%{realver}-src/ --exclude-vcs
